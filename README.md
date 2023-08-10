@@ -1,8 +1,14 @@
 # HGTMDA: Heterogeneous graph transformer via biological entity graph for miRNA-disease associations prediction
  To accurately identify MDAs, we proposed a heterogeneous graph transformer via biological entity graph for the miRNA-disease association's prediction model (called HGTMDA). HGTMDA collects and collates 8 types of biological entity relationships from 8 types of small biological molecules to construct one of the most complete heterogeneous biological entity graphs. For complex heterogeneous graphs, HGTMDA introduces a powerful heterogeneous graph transformer to extract graph structure features of miRNAs and diseases and combine them with attribute features of both to identify potential associations.
 
-
-
+## Table of Contents
+- [Data description](#Data description)
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Contributing](#contributing)
+- [Cite](#cite)
+- [Contacts](#contacts)
+- [License](#license)
 
 # Data description
 
@@ -18,7 +24,7 @@
 | miRNA_disease_feature.csv | feature of miRNAs and diseaseases fused with GIP |
 
 
-# Requirements
+# Installation
 HGTMDA is tested to work under:
 
 Python == 3.7
@@ -36,6 +42,7 @@ pandas == 1.1.5
 matplotlib == 3.3.4
 
 networkx == 2.5.1
+
 # Quick start
 To reproduce our results:
 
@@ -74,3 +81,15 @@ python  ./casestudies.py
 # License
 This source code is licensed under the MIT license found in the LICENSE file in the root directory of this source tree.
 
+
+
+# Contributing
+
+Zouhaitao Jiboya..
+
+# Cite
+
+
+
+# Contacts
+If you have any questions or comments, please feel free to email: zht@glut.edu.cn.
