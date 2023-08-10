@@ -1,0 +1,100 @@
+bacteroidetes,b0,6
+comamonadaceae,b1,6
+haemophilus,b2,6
+helicobacter pylori,b3,6
+oxalobacteraceae,b4,6
+prevotella,b5,6
+proteobacteria,b6,6
+sphingomonadaceae,b7,6
+staphylococcus,b8,6
+clostridium difficile,b9,6
+staphylococcus aureus,b10,6
+staphylococcus epidermidis,b11,6
+stenotrophomonas maltophilia,b12,6
+actinobacteria,b13,6
+aerococcus,b14,6
+betaproteobacteria,b15,6
+clostridiales,b16,6
+clostridium,b17,6
+firmicutes,b18,6
+fusobacteria,b19,6
+gardnerella,b20,6
+gardnerella vaginalis,b21,6
+lactobacillus,b22,6
+lactobacillus crispatus,b23,6
+leptotrichia,b24,6
+megasphaera,b25,6
+mobiluncus,b26,6
+streptobacillus,b27,6
+enterobacteriaceae,b28,6
+enterococcus,b29,6
+klebsiella,b30,6
+propionibacterium,b31,6
+propionibacterium acnes,b32,6
+streptococcus,b33,6
+actinobacillus,b34,6
+aggregatibacter,b35,6
+bacillus,b36,6
+bacteroidaceae,b37,6
+bacteroides,b38,6
+bacteroides fragilis,b39,6
+bacteroides thetaiotaomicron,b40,6
+bifidobacterium,b41,6
+citrobacter,b42,6
+cronobacter,b43,6
+desulfotomaculum,b44,6
+edwardsiella,b45,6
+enterobacter,b46,6
+erwinia,b47,6
+erysipelothrix,b48,6
+escherichia,b49,6
+eubacterium,b50,6
+faecalibacterium,b51,6
+fusobacterium,b52,6
+hafnia,b53,6
+lactococcus,b54,6
+mannheimia,b55,6
+pantoea,b56,6
+pasteurella,b57,6
+pectobacterium,b58,6
+peptostreptococcus,b59,6
+porphyromonas,b60,6
+salmonella,b61,6
+serratia,b62,6
+shigella,b63,6
+tenericutes,b64,6
+veillonella,b65,6
+verrucomicrobia,b66,6
+vibrio,b67,6
+yersinia,b68,6
+enterobacter aerogenes,b69,6
+gammaproteobacteria,b70,6
+klebsiella pneumoniae,b71,6
+shigella dysenteriae,b72,6
+faecalibacterium prausnitzii,b73,6
+burkholderia,b74,6
+pseudomonas,b75,6
+coxiellaceae,b76,6
+lysobacter,b77,6
+streptococcus mitis,b78,6
+xanthomonas,b79,6
+bilophila,b80,6
+enterococcus faecalis,b81,6
+haemophilus parainfluenzae,b82,6
+lactobacillus salivarius,b83,6
+pasteurellaceae,b84,6
+ruminococcus,b85,6
+streptococcaceae,b86,6
+streptococcus anginosus,b87,6
+streptococcus salivarius,b88,6
+veillonellaceae,b89,6
+alcaligenaceae,b90,6
+oxalobacter formigenes,b91,6
+fusobacterium nucleatum,b92,6
+escherichia coli,b93,6
+actinomyces,b94,6
+porphyromonas gingivalis,b95,6
+selenomonas,b96,6
+treponema,b97,6
+clostridium perfringens,b98,6
+mycoplasma hyorhinis,b99,6
