@@ -87,7 +87,7 @@ This source code is licensed under the MIT license found in the LICENSE file in 
 
 # Contributing
 
-Zouhaitao Jiboya..
+All authors were involved in the conceptualization of the proposed method. BYJ and SLP conceived and supervised the project. HTZ and BYJ designed the study and developed the approach. BYJ and HTZ implemented and applied the method to microbial data. BYJ and HTZ analyzed the results. BYJ and SLP contributed to the review of the manuscript before submission for publication. All authors read and approved the final manuscript.
 
 # Cite
 
