@@ -55,12 +55,12 @@ pip install pytorch == 1.10.2+cu113
 ```
 2, Run embedding.py to generate miRNA and disease embedding feature, the options are:
 ```
-python ./embedding.py
+python ./src/embedding.py
 
 ```
 3, Run train.py to generate train_model and performance score, the options are:
 ```
-python ./train.py
+python ./src/train.py
 
 ```
 4, Ablation experiment：Run attributes_feature/train.py，network_feature/train.py to generate performance score for everyone, the options are:
@@ -72,12 +72,12 @@ python ./ablation/network_feature/train.py
 ```
 5, Run 5CV/train.py to generate 5-CV scores, the options are:
 ```
-python ./5_Fold.py
+python ./5CV/train.py
 
 ```
 6, case_study: Run casestudies.py to generate three diseases prediction, the options are:
 ```
-python  ./casestudies.py
+python  ./src/casestudies.py
 
 ```
 # License
