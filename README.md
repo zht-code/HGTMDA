@@ -1,9 +1,9 @@
-# HGTMDA: Heterogeneous graph transformer via biological entity graph for miRNA-disease associations prediction
- To accurately identify MDAs, we proposed a heterogeneous graph transformer via biological entity graph for the miRNA-disease association's prediction model (called HGTMDA). HGTMDA collects and collates 8 types of biological entity relationships from 8 types of small biological molecules to construct one of the most complete heterogeneous biological entity graphs. For complex heterogeneous graphs, HGTMDA introduces a powerful heterogeneous graph transformer to extract graph structure features of miRNAs and diseases and combine them with attribute features of both to identify potential associations.
+# MHGTMDA: molecular heterogeneous graph transformer based on biological entity graph for miRNA-disease associations prediction
+MicroRNAs (miRNAs) play a crucial role in the prevention, prognosis, diagnosis, and treatment of complex diseases. However, the current research on miRNA and Disease Association (MDA) is limited. Existing computational methods primarily focus on biologically relevant molecules directly associated with miRNA or disease, overlooking the fact that the human body is a highly complex system where miRNA or disease may indirectly correlate with various types of biomolecules. To address this, we propose a novel prediction model named MHGTMDA (miRNA and disease association prediction using Heterogeneous Graph Transformer based on Molecular Heterogeneous Graph). MHGTMDA integrates biological entity relationships of eight biomolecules, constructing a relatively comprehensive heterogeneous biological entity graph. Serving as a powerful molecular heterogeneous graph transformer, MHGTMDA extracts graph structural elements of miRNA and disease, combining their attribute information to detect potential correlations. In a 5-fold cross-validation study, MHGTMDA achieved an Area Under the Receiver Operating Characteristic Curve (AUC) of 0.9569, surpassing state-of-the-art methods by at least 3\%. Feature ablation experiments suggest that considering features among multiple biomolecules is more effective in uncovering miRNA-disease correlations. Furthermore, we conducted differential expression analyses on breast cancer and lung cancer, using MHGTMDA to further validate differentially expressed miRNAs. The results demonstrate MHGTMDA's capability to identify novel MDAs.
 
 ![Image text](https://github.com/zht-code/HGTMDA/blob/main/IMG/MHGTMDA.svg)
 
-Overall architecture of HGTMDA. A. Data sources for HGTMDA. B. The integrated miRNA sequence and similarity network and the integrated disease similarity network were constructed respectively to extract the inherent attribute features of both. C. The sub-module constructed Biological entity graphs, including MiRNA, Disease, Microbe, LncRNA, CircRNA, MRNA, Protein, and Drug. D. The sub-module mainly extracts the embedding feature of miRNA and disease in Biological entity graphs. E. The multimodal embedding representations of miRNAs and diseases were concatenated and fed into the MLP for training and prediction.
+Overall architecture of MHGTMDA. A. Data sources for MHGTMDA. B. The integrated miRNA sequence and similarity network and the integrated disease similarity network were constructed respectively to extract the inherent attribute features of both. C. The sub-module constructed Biological entity graphs, including MiRNA, Disease, Microbe, LncRNA, CircRNA, MRNA, Protein, and Drug. D. The sub-module mainly extracts the embedding feature of miRNA and disease in Biological entity graphs. E. The multimodal embedding representations of miRNAs and diseases were concatenated and fed into the MLP for training and prediction.
 ## Table of Contents
 - [Installation](#installation)
 - [Quick start](#quick-start)
@@ -51,34 +51,29 @@ To reproduce our results:
 1, Download the environment required by HGTMDA
 ```
 pip install pytorch == 1.10.2+cu113
-
 ```
-2, Run embedding.py to generate miRNA and disease embedding feature, the options are:
+2, Run embedding.py to generate miRNA and disease embedding features, Specifically, we constructed the graph utilizing the torch_geometric tool. First, We enter the collected biological entities into HeteroData as nodes (HeteroData is a PyG built-in data structure for representing heterogeneous graphs). Next, we constructed node mappings by different node types to construct edge indexes in HeteroData. Finally, we construct node type labels to represent the type of each node in HeteroData..the options are:
 ```
 python ./src/embedding.py
-
 ```
-3, Run train.py to generate train_model and performance score, the options are:
+3, The specific code is run by referring to the following train.py to generate train_model and performance score, the options are:
 ```
 python ./src/train.py
 
 ```
-4, Ablation experiment：Run attributes_feature/train.py，network_feature/train.py to generate performance score for everyone, the options are:
+4, Ablation experiment： To further demonstrate the effectiveness of MHGTMDA, we conducted two sets of ablation experiments, removing attribute features and structural features respectively, to compare the effects with MHGTMDA under 5-fold cross-validation experiment. The specific code is run by referring to the following ../attributes_feature/train.py，../network_feature/train.py to generate performance score for everyone, the options are:
 ```
 python ./ablation/attributes_feature/train.py
 
 python ./ablation/network_feature/train.py
-
 ```
-5, Run 5CV/train.py to generate 5-CV scores, the options are:
+5, We use a 5-fold cross-validation strategy to evaluate the generalization ability of our model (MHGTMDA). In the results, we plot the receiver operating characteristic curves(ROCs) and precision-recall curves (PRCs). Furthermore, the area under the ROCs (AUC) was also used to measure the ability of MHGTMDA. The specific code is run by referring to the following ./5CV/train.py to generate 5-CV scores, the options are:
 ```
 python ./5CV/train.py
-
 ```
-6, case_study: Run casestudies.py to generate three diseases prediction, the options are:
+6, we conducted differential expression analyses on breast cancer and lung cancer, using MHGTMDA to further validate differentially expressed miRNAs. The specific code is run by referring to the following ./src/casestudies.py to generate two disease predictions, the options are:
 ```
 python  ./src/casestudies.py
-
 ```
 # License
 This source code is licensed under the MIT license found in the LICENSE file in the root directory of this source tree.
