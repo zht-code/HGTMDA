@@ -13,9 +13,9 @@ import os
 import warnings
 
 warnings.filterwarnings("ignore")
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  # （保证程序cuda序号与实际cuda序号对应）
-os.environ['CUDA_VISIBLE_DEVICES'] = "1"  # （代表仅使用第0，1号GPU）
-# 如果GPU可用，利用GPU进行训练
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  
+os.environ['CUDA_VISIBLE_DEVICES'] = "1"  
+
 device = t.device('cuda:0' if t.cuda.is_available() else "cpu")
 t.backends.cudnn.enabled = True
 
@@ -37,36 +37,36 @@ parser.add_argument('--mlp', type=list, default=[64, 2], help='mlp layers')
 parser.add_argument('--neighbor', type=int, default=20, help='neighbor')
 parser.add_argument('--save_score', default='True', help='save_score')
 
-args = parser.parse_args()  # 会将命令行参数转换为Python对象，可以通过属性来访问这些参数的值。
+args = parser.parse_args()  
 args.dd2 = True
 args.data_dir = 'dataset/'
-args.result_dir = 'result/'  # 保存结果
+args.result_dir = 'result/'  
 args.save_score = True if str(args.save_score) == 'True' else False
 
 
-# 加载数据集
+
 def loading():
     data = dict()
-    # 读取所有md_sample样本
+   
     data['all_sample'] = pd.read_csv(args.data_dir + 'all_sample.csv', header=None).iloc[:, :].values
-    # 读取miRNA和disease的名字
+ 
     data['miRNA'] = pd.read_csv(args.data_dir + 'quchong_bianhao/miRNA.csv', header=None).iloc[:, :].values
     data['disease'] = pd.read_csv(args.data_dir + 'quchong_bianhao/disease.csv', header=None).iloc[:, :].values
     data['miRNA_disease'] = np.concatenate((data['miRNA'], data['disease']), axis=0)
-    # 读取融合了GIP的miRNA和disease的特征
+   
     data['miRNA_disease_feature'] = pd.read_csv(args.data_dir + 'miRNA_disease_feature.csv', header=None).iloc[:,
                                     :].values
-    # 加载提取miRNA的embedding
+    
     miRNA_embedding = np.loadtxt(args.data_dir + 'data/miRNA_embedding.txt',dtype=np.float,delimiter=None,unpack=False)
     data['miRNA_embedding'] = miRNA_embedding[:901]
 
-    # 加载提取disease的embedding
+   
     disease_embedding = np.loadtxt(args.data_dir + 'data/disease_embedding.txt',dtype=np.float,delimiter=None,unpack=False)
     data['disease_embedding'] = disease_embedding[:877]
     data['miRNA_disease_embedding'] = np.concatenate((data['miRNA_embedding'], data['disease_embedding']), axis=0)
     data['inter_miRNA_disease_feature'] = np.concatenate((data['miRNA_disease_feature'], data['miRNA_disease_embedding']), axis=1)
     return data
-# 将miRNA、disease名字转为索引
+
 def make_index(data, sample):
     sample_index = []
     for i in range(sample.shape[0]):
@@ -77,20 +77,20 @@ def make_index(data, sample):
     return sample_index
 
 if __name__ == '__main__':
-    # 数据处理
+    
     dataset = loading()
     # args.m_drug_d_num = dataset['m_drug_d_sample'].shape[0]
     # args.m_mRNA_d_num = dataset['m_mRNA_d_sample'].shape[0]
     # args.m_incRNA_d_num = dataset['m_incRNA_d_sample'].shape[0]
     dataset['inter_miRNA_disease_feature'] = t.FloatTensor(dataset['inter_miRNA_disease_feature']).to(device)
-    # 模型实例化
+    
     model = MDA(args).to(device)
     optimizer = optim.Adam(model.parameters(), weight_decay=args.wd, lr=args.lr)
     scheduler = t.optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.8)
     cross_entropy = nn.BCELoss(reduction='mean')
     file_num = 1
 
-    # 保存最优的test_auc、recall等
+ 
     auc = 0
     auprc = 0
     acc = 0
@@ -98,9 +98,9 @@ if __name__ == '__main__':
     recall = 0
     pre = 0
 
-    # 记录最大auc
+   
     max_test_acc = 0
-    # 记录五折折数
+    
     k = 1
     kfold = KFold(n_splits=5, shuffle=True, random_state=123)
     for train_index, test_index in kfold.split(dataset['all_sample'][:, :2]):
@@ -144,7 +144,7 @@ if __name__ == '__main__':
             test_pre = precision_score(test_label.detach().cpu().numpy(),
                                        np.rint(test_score.detach().cpu().numpy()).astype(np.int64), average='macro')
 
-            # 保存达标的训练的模型
+            
             if test_acc > max_test_acc:
                 t.save(model.state_dict(), "./save_model/5_fold/train_model.pth")
                 max_test_acc = test_acc
@@ -159,7 +159,7 @@ if __name__ == '__main__':
                 print(f'Train Auc.: {train_auc:.4f}' f' | Test Auc.: {test_auc:.4f}')
                 print(f'Train Loss.: {train_loss.item():.4f}')
                 print(f'Train Acc.: {train_acc:.4f}' f' | Test Acc.: {test_acc:.4f}')
-            # 更新学习率
+            
             scheduler.step()
         # file_num += 1
         # k += 1
