@@ -12,9 +12,7 @@ from torch_geometric.nn import GATConv, GCNConv
 
 
 class MS_CAM(nn.Module):
-    '''
-    单特征 进行通道加权,作用类似SE模块
-    '''
+ 
 
     def __init__(self, channels=3, r=2):
         super(MS_CAM, self).__init__()
@@ -117,20 +115,20 @@ class MDA(nn.Module):
                                  nn.Linear(64, 1), nn.Sigmoid())
 
     def forward(self, data, train_sample, test_sample, device):
-        # 随机生成drug、mRNA、incRNA特征
+      
         # m_drug_d_feature = torch.randn((self.args.m_drug_d_num, self.args.m_drug_d_num))
         # m_mRNA_d_feature = torch.randn((self.args.m_mRNA_d_num, self.args.m_mRNA_d_num))
         # m_incRNA_d_feature = torch.randn((self.args.m_incRNA_d_num, self.args.m_incRNA_d_num))
-        # 构图
+      
         # m_drug_d_ass = self.gat_m_drug_m(m_drug_d_feature, data['m_drug_d_adj'], device)  # 1x2060x901
         # m_incRNA_d_ass = self.gat_m_incRNA_d(m_incRNA_d_feature, data['m_incRNA_d_adj'], device)  # 1x2459x901
         # m_mRNA_d_ass = self.gat_m_mRNA_d(m_mRNA_d_feature, data['m_mRNA_d_adj'], device)  # 1x3929x901
-        # 将drug、mRNA、incRNA中间层去掉
+     
         # m_drug_d_ass = torch.cat((m_drug_d_ass[0][:901], m_drug_d_ass[0][1183:]), dim=0).unsqueeze(0)  # 1x1778x901
         # m_incRNA_d_ass = torch.cat((m_incRNA_d_ass[0][:901], m_incRNA_d_ass[0][1582:]), dim=0).unsqueeze(
         #     0)  # 1x1778x901
         # m_mRNA_d_ass = torch.cat((m_mRNA_d_ass[0][:901], m_mRNA_d_ass[0][3052:]), dim=0).unsqueeze(0)  # 1x1778x901
-        # # 将四张图拼在一起
+        
         # result1 = torch.cat((m_drug_d_ass, m_incRNA_d_ass), 0)
         # sum_x = torch.cat((result1, m_mRNA_d_ass), 0)
         # sum_x = sum_x.unsqueeze(0)  # 1x3x1778x901
@@ -145,7 +143,7 @@ class MDA(nn.Module):
         # sum_x = sum_x.permute(2, 1, 0, 3)  # 1x3x1778x901
         # sum_x = torch.squeeze(sum_x, dim=0)  # 3x1778x901
 
-        # 将四张图拼在一起
+       
         # sum_x = (sum_x[0] + sum_x[1] + sum_x[2]) / 3  # 1778x901
         # sum_x = torch.cat((sum_x, data['miRNA_disease_feature']), 1)  # 1778x1802
 
