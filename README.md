@@ -27,7 +27,7 @@ Overall architecture of MHGTMDA. A. Data sources for MHGTMDA. B. The integrated 
 
 
 # Installation
-HGTMDA is tested to work under:
+MHGTMDA is tested to work under:
 
 Python == 3.7
 
@@ -48,7 +48,7 @@ networkx == 2.5.1
 # Quick start
 To reproduce our results:
 
-1, Download the environment required by HGTMDA
+1, Download the environment required by MHGTMDA
 ```
 pip install pytorch == 1.10.2+cu113
 ```
